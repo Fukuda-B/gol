@@ -55,7 +55,7 @@ const update_stat = () => {
   stat.innerHTML = '<p>Status</p>'
     +'<p>Born: ' + logg.born
     +'<br>Dead: ' + logg.dead
-    +'<br>Survivors: ' + (logg.surv/(settings.cell.x*settings.cell.y)).toFixed(4) + '%'
+    +'<br>Survivors: ' + (logg.surv*100/(settings.cell.x*settings.cell.y)).toFixed(2) + '%'
     +'<br>Diff: ' + (logg.born-logg.dead)
     +'<br>-----'
     +'<br>update rate: ' + parseInt(settings.timer) + 'ms'
