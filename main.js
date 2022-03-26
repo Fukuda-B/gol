@@ -73,7 +73,7 @@ const event_listen = () => {
     if (interval_id !== null) {
       clearInterval(interval_id);
       main();
-      interval_id = setInterval(main, settings.timer);
+      // interval_id = setInterval(main, settings.timer);
     }
   })
 
