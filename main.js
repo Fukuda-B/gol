@@ -4,11 +4,11 @@
 
 // ----- init
 let settings = {
-  'width': 400,
-  'height': 400,
+  'width': 600,
+  'height': 600,
   'cell': {
-    'x': 40,
-    'y': 40,
+    'x': 45,
+    'y': 45,
   },
   'timer': 1000 / 8,
   'cell_size': null,
@@ -70,11 +70,7 @@ const event_listen = () => {
   option_timer.addEventListener('input', () => {
     settings.timer = 1000 / option_timer.value;
     update_stat();
-    if (interval_id !== null) {
-      clearInterval(interval_id);
-      main();
-      // interval_id = setInterval(main, settings.timer);
-    }
+    if (interval_id !== null) clearInterval(interval_id);
   })
 
   option_rand_rate.addEventListener('input', () => {
@@ -185,7 +181,7 @@ const step = () =>{
 
 const init_draw = () => {
   ctx.fillStyle = '#444';
-  ctx.fillRect(0, 0, 400, 400);
+  ctx.fillRect(0, 0, settings.width, settings.height);
   ctx.beginPath();
   for (let i = 0; i <= settings.cell.x; i++) {
     ctx.moveTo(settings.cell_size.x * i, 0);

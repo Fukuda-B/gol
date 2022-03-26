@@ -5,16 +5,16 @@ body {
 }
 #main_disp {
     margin-top: 40px;
-    margin-left: calc(50% - 305px);
-    width: 400px;
-    height: 400px;
+    margin-left: calc(50% - 405px);
+    width: 600px;
+    height: 600px;
     border: none;
 }
 
 #control {
     position: absolute;
-    top: 350px;
-    left: calc(50% + 105px);
+    top: 395px;
+    left: calc(50% + 205px);
     /* width: 232px; */
     /* text-align: center; */
     /* padding: 0 10px; */
@@ -35,7 +35,7 @@ body {
 #control p {
     color: #ddd;
     margin: 0;
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 #option {
@@ -43,10 +43,10 @@ body {
     border-radius: 3px;
     padding: 7px 10px;
     color: #ddd;
-    font-size: 0.8em;
+    font-size: 0.9em;
     position: absolute;
     top: 40px;
-    left: calc(50% + 105px);
+    left: calc(50% + 205px);
     width: 210px;
 }
 #option p {
@@ -59,10 +59,10 @@ body {
     border-radius: 3px;
     padding: 7px 10px;
     color: #ddd;
-    font-size: 0.8em;
+    font-size: 0.9em;
     position: absolute;
-    top: 145px;
-    left: calc(50% + 105px);
+    top: 185px;
+    left: calc(50% + 205px);
     width: 210px;
 }
 #stat p {
