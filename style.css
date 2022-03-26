@@ -2,6 +2,7 @@ body {
     height: 100vh;
     margin: 0;
     background: #222228;
+    font-family: arial, sans-serif;
 }
 #main_disp {
     margin-top: 40px;
