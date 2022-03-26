@@ -12,18 +12,24 @@ let settings = {
   },
   'timer': 1000 / 8,
   'cell_size': null,
-  'rand_rate': 0.1, // Initial survival rate when randomize
+  'rand_rate': 0.2, // Initial survival rate when randomize
 }
 let o_map = Array(settings.cell.x + 2).fill().map(
   () => Array(settings.cell.y + 2).fill(0));
 let ctx, main_disp = null;
 let interval_id = null;
+let logg = {
+  'born': 0,
+  'dead': 0,
+  'surv': 0,
+};
 
 // ----- onload
 window.onload = () => {
   [ctx, main_disp] = init();
   init_draw();
   event_listen();
+  update_stat();
 };
 
 // ----- func
@@ -44,7 +50,38 @@ const init = () => {
   return [ctx, main_disp];
 }
 
+const update_stat = () => {
+  let stat = document.getElementById('stat');
+  stat.innerHTML = '<p>Status</p>'
+    +'<p>Born: ' + logg.born
+    +'<br>Dead: ' + logg.dead
+    +'<br>Survivors: ' + (logg.surv/(settings.cell.x*settings.cell.y)).toFixed(4) + '%'
+    +'<br>Diff: ' + (logg.born-logg.dead)
+    +'<br>-----'
+    +'<br>update rate: ' + parseInt(settings.timer) + 'ms'
+    +'<br>probability: ' + (parseFloat(settings.rand_rate)).toFixed(2)
+    +'</p>';
+}
+
 const event_listen = () => {
+  let option_timer = document.getElementById('option_timer');
+  let option_rand_rate = document.getElementById('option_rand_rate');
+
+  option_timer.addEventListener('input', () => {
+    settings.timer = 1000 / option_timer.value;
+    update_stat();
+    if (interval_id !== null) {
+      clearInterval(interval_id);
+      main();
+      interval_id = setInterval(main, settings.timer);
+    }
+  })
+
+  option_rand_rate.addEventListener('input', () => {
+    settings.rand_rate = option_rand_rate.value;
+    update_stat();
+  })
+
   document.getElementById('start_button').addEventListener('click', () => {
     if (interval_id !== null) clearInterval(interval_id);
     main();
@@ -65,6 +102,7 @@ const event_listen = () => {
     randomize(o_map);
     init_draw();
     draw();
+    update_stat();
   });
 
   main_disp.addEventListener('click', e => {
@@ -80,6 +118,7 @@ const event_listen = () => {
     // console.log(cell_x, cell_y);
     init_draw();
     draw();
+    update_stat();
     });
 }
 
@@ -87,6 +126,7 @@ const main = () => {
   step();
   init_draw();
   draw();
+  update_stat();
 }
 
 const randomize = (arr) => {
@@ -103,7 +143,9 @@ const step = () =>{
   let g_map = Array(settings.cell.x + 2).fill().map(
     () => Array(settings.cell.y + 2).fill(0));
 
-  let cc = 0; // counter
+  let cc = 0; // cell counter
+  logg.born = 0;
+  logg.dead = 0;
   for (let i = 1; i <= settings.cell.x; i++) {
     for (let j = 1; j <= settings.cell.y; j++) {
       cc = 0;
@@ -129,8 +171,13 @@ const step = () =>{
           -----
           つまり、周囲の生存が3 または 2かつ[i, j]が生存しているとき、生き残る
       */
-      if (cc === 3 || cc === 2 && o_map[i][j]) g_map[i][j] = 1;
-      else g_map[i][j] = 0;
+      if (cc === 3 || cc === 2 && o_map[i][j]) {
+        g_map[i][j] = 1;
+        if (o_map[i][j] === 0) logg.born++;
+      } else {
+        g_map[i][j] = 0;
+        if (o_map[i][j] === 1) logg.dead++;
+      }
     }
   }
   o_map = g_map; // old_map <-- game_map
@@ -157,6 +204,7 @@ const init_draw = () => {
 
 const draw = () => {
   ctx.fillStyle = '#bbb';
+  logg.surv = 0;
   for (let i = 1; i <= settings.cell.x; i++) {
     for (let j = 1; j <= settings.cell.y; j++) {
       if (o_map[i][j]) {
@@ -166,6 +214,7 @@ const draw = () => {
           settings.cell_size.x - 2,
           settings.cell_size.y - 2,
           )
+        logg.surv++;
       }
     }
   }

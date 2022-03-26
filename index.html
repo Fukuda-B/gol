@@ -14,6 +14,29 @@
         <button id="stop_button"><i class="fa-solid fa-pause"></i><p>Stop</p></button>
         <button id="randomize_button"><i class="fa-solid fa-shuffle"></i><p>Random</p></button>
     </div>
+    <div id="option">
+        <p>Option</p>
+        <div>
+            <input type="range" name="timer" id="option_timer"
+            min="1" value="8" max="20">
+            <label for="timer">update rate</label>
+        </div>
+        <div>
+        <input type="range" name="rand_rate" id="option_rand_rate"
+            min="0" max="1" value="0.2" step="0.01">
+            <label for="rand_rate">probability</label>
+        </div>
+    </div>
+    <div id="stat">
+        <p>Status</p>
+        <p>Born:
+        <br>Dead:
+        <br>Survivors:
+        <br>Diff:
+        <br>-----
+        <br>update rate:
+        <br>probability:</p>
+    </div>
 </body>
 <script src="main.js"></script>
 </html>
