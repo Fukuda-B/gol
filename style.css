@@ -14,9 +14,8 @@ body {
 
 #control {
     position: absolute;
-    top: 395px;
+    top: 605px;
     left: calc(50% + 205px);
-    /* width: 232px; */
     /* text-align: center; */
     /* padding: 0 10px; */
 }
@@ -50,9 +49,18 @@ body {
     left: calc(50% + 205px);
     width: 210px;
 }
+#option input {
+    width: 128px;
+    height: 16px;
+    margin-top: 10px;
+}
+#option label {
+    font-size: 0.95em;
+    line-height: 16px;
+}
 #option p {
     margin: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 #stat {
@@ -62,7 +70,7 @@ body {
     color: #ddd;
     font-size: 0.9em;
     position: absolute;
-    top: 185px;
+    top: 145px;
     left: calc(50% + 205px);
     width: 210px;
 }
