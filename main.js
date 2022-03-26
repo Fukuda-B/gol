@@ -15,8 +15,7 @@ let settings = {
   'rand_rate': 0.1, // Initial survival rate when randomize
 }
 let o_map = Array(settings.cell.x + 2).fill().map(
-  () => Array(settings.cell.y + 2).fill(0)
-);
+  () => Array(settings.cell.y + 2).fill(0));
 let ctx, main_disp = null;
 let interval_id = null;
 
@@ -101,10 +100,12 @@ const randomize = (arr) => {
 }
 
 const step = () =>{
-  let g_map = o_map; // game_map <-- old_map
+  let g_map = Array(settings.cell.x + 2).fill().map(
+    () => Array(settings.cell.y + 2).fill(0));
+
   let cc = 0; // counter
-  for (let i = 1; i < settings.cell.x; i++) {
-    for (let j = 1; j < settings.cell.y; j++) {
+  for (let i = 1; i <= settings.cell.x; i++) {
+    for (let j = 1; j <= settings.cell.y; j++) {
       cc = 0;
       cc += o_map[i - 1][j - 1];
       cc += o_map[i - 1][j];
@@ -128,7 +129,7 @@ const step = () =>{
           -----
           つまり、周囲の生存が3 または 2かつ[i, j]が生存しているとき、生き残る
       */
-      if (cc === 3 || cc === 2 && g_map[i][j]) g_map[i][j] = 1;
+      if (cc === 3 || cc === 2 && o_map[i][j]) g_map[i][j] = 1;
       else g_map[i][j] = 0;
     }
   }
@@ -136,7 +137,7 @@ const step = () =>{
 }
 
 const init_draw = () => {
-  ctx.fillStyle = '#555';
+  ctx.fillStyle = '#444';
   ctx.fillRect(0, 0, 400, 400);
   ctx.beginPath();
   for (let i = 0; i <= settings.cell.x; i++) {

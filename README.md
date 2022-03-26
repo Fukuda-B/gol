@@ -1,4 +1,5 @@
 # gol
-game of life  
+Game of Life  
   
-![sample](./img/sample.jpg)  
+![sample_img](./img/sample.gif)  
+
