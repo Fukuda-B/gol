@@ -1,2 +1,4 @@
 # gol
-game of life
+game of life  
+  
+![sample](./img/sample.jpg)  
